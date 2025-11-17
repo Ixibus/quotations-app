@@ -19,11 +19,11 @@ function counterUp() {
   quoteCount++;
 
   if (quoteCount === 0) {
-    count.textContent = "0 citation";
+    count.textContent = "0 citation ☹️";
   } else if (quoteCount === 1) {
-    count.textContent = "1 citation";
+    count.textContent = "1 citation 🙂";
   } else {
-    count.textContent = `${quoteCount} citations`;
+    count.textContent = `${quoteCount} citations 😁`;
   }
 }
 
@@ -31,11 +31,11 @@ function counterdown() {
   quoteCount--;
 
   if (quoteCount === 0) {
-    count.textContent = "0 citation";
+    count.textContent = "0 citation ☹️";
   } else if (quoteCount === 1) {
-    count.textContent = "1 citation";
+    count.textContent = "1 citation 🙂";
   } else {
-    count.textContent = `${quoteCount} citations`;
+    count.textContent = `${quoteCount} citations 😁`;
   }
 }
 
@@ -56,6 +56,7 @@ function addQuote(quote, author) {
   
   // 2. Insertion de la nouvelle création dans un container
   const quoteContainer = document.createElement("div");
+  quoteContainer.setAttribute("class", "container_quotes");
   quoteContainer.appendChild(textP);
   quoteContainer.appendChild(authorP);
   
@@ -63,11 +64,13 @@ function addQuote(quote, author) {
   quoteListContainer.appendChild(quoteContainer);
   
   // Bonus perso : bouton de suppression (+ création d'un identifiant par citation)
-  const deletionBtn = document.createElement("span");
-  const textBtn = document.createTextNode("Supprimer la citation");
+//   const deletionBtn = document.createElement("div");
+  const deletionBtn = document.createElement("div");
+  const textBtn = document.createTextNode("Supprimer");
+  deletionBtn.setAttribute("class", "deletionButton");
   deletionBtn.setAttribute("identifier", `${innerText.textContent}`);
+  deletionBtn.appendChild(textBtn);
   quoteContainer.appendChild(deletionBtn);
-  quoteContainer.appendChild(textBtn);
 }
 
 
@@ -76,8 +79,10 @@ function addQuote(quote, author) {
 
 // Soumission des entrées de textes avec leur auteur
 submit.addEventListener("click", () => {
-    addQuote(citationInput.value, authorInput.value);
+    addQuote(`" ${citationInput.value} "`, authorInput.value);
   counterUp();
+  citationInput.value = "";
+  authorInput.value = "";
 });
 
 // Eviter le chargement autommatique du "form"
@@ -90,11 +95,16 @@ form.addEventListener("click", (e) => {
 // ----- Bonus perso : Logique de suppression ----- 
 
 quoteListContainer.addEventListener("click", (e) => {
-  const btnAttributSelected = e.target.childNodes[2].attributes[0].value;
+//   const btnAttributSelected = e.target.childNodes[2].attributes[0].value;
+  const btnAttributSelected = e.target.attributes[1].textContent;
+  const parentFirstChildTextContentSelected = e.target.parentNode.firstChild.textContent;
 
-  // si l'attribut du bouton de supression correspond à la valeur du texte de citation (donc **textP**), on supprime son parent containeur du texte de citation
-  if (btnAttributSelected === e.target.firstChild.textContent) {
-    e.target.remove();
+  console.log(btnAttributSelected + " " + e.target.parentNode.firstChild.textContent)
+  console.log(e.target.parentNode)
+
+//   si l'attribut du bouton de supression correspond à la valeur du texte de citation (donc **textP**), on supprime son parent containeur du texte de citation
+  if (btnAttributSelected === parentFirstChildTextContentSelected) {
+    e.target.parentNode.remove();
     counterdown();
   } else {
     console.log("non");
