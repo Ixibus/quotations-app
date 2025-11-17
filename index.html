@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Niconne&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Citations</title>
+  </head>
+  <body>
+    <h1>Mes citations</h1>
+    <h2>Gestionnaire de citations en ligne</h2>
+    <h3>0 citation ☹️</h3>
+    <br />
+
+    <form action="" id="form">
+      <label for="citation_input" id="label_citation_input"
+        >Saisissez la citation</label
+      >
+      <input type="text" id="citation_input" name="citation_input" />
+
+      <label for="author_input" id="label_author_input"
+        >Saissisez son auteur</label
+      >
+      <input type="text" id="author_input" name="author_input" />
+
+      <button type="submit" id="submitAction">Insérer</button>
+    </form>
+
+    <div id="quote-list">
+      <div class="quote">
+        <!-- <p class="text">"On ne naît pas femme, on le devient."</p>
+        <p class="author">Simone de Beauvoir</p> -->
+        <p class="text"></p>
+        <p class="author"></p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
